@@ -16,7 +16,6 @@
                  [cljsjs/react "15.3.1-0"]
                  [cljsjs/react-dom "15.3.1-0"]
                  #_[org.omcljs/om "1.0.0-alpha46"]
-                 #_[reagent "0.6.0"]
                  ]
 
   :plugins [[lein-figwheel "0.5.9"]
@@ -58,7 +57,10 @@
 
   :figwheel { :css-dirs ["resources/public/css"] }
 
-  :profiles {:dev {:dependencies [[binaryage/devtools "0.9.2"]
+  :profiles {
+             :dev {
+                   :dependencies [[binaryage/devtools "0.9.2"]
+                                  [reagent "0.6.0"]
                                   [figwheel-sidecar "0.5.9"]
                                   [com.cemerick/piggieback "0.2.1"]]
                    ;; need to add dev source path here to get user.clj loaded
@@ -67,4 +69,6 @@
                    ;; :plugins [[cider/cider-nrepl "0.12.0"]]
                    :repl-options {; for nREPL dev you really need to limit output
                                   :init (set! *print-length* 50)
-                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}}})
+                                  :nrepl-middleware [cemerick.piggieback/wrap-cljs-repl]}
+                   }
+             })
