@@ -1,4 +1,5 @@
 figwheel_server.log
+.lein-repl-history
 .nrepl-port
 lein-figwheel/
 compiled/
