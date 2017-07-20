@@ -14,3 +14,16 @@ Amusing [xkcd](https://xkcd.com/)'s take on it:
 
 For those vimsters out there, take a look at `figwheel-vim.md` and `figwheel-spacemacs.md` to integrate with Bruce's invaluable [figwheel](https://github.com/bhauman/lein-figwheel)
  
+## Let's get figwheelin'
+
+If you just want to quickly clone and run this project:
+
+* In your favourite terminal and dev space:
+  * `git clone https://github.com/oldgit/bravecards.git`
+  * `cd bravecards`
+  * `lein figwheel`
+  * A browser window at: http://localhost:3449/cards.html should pop up
+  * Click on **bravecards.core**
+  * Congratulations - you're figwheelin'!
+ 
+ I prefer to hook up my neovim editor to figwheel by following the instructions in `figwheel-vim.md`
