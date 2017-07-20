@@ -12,7 +12,7 @@ Amusing [xkcd](https://xkcd.com/)'s take on it:
 
 ![alt lisp cycles comic](https://imgs.xkcd.com/comics/lisp_cycles.png 'Lisp xkcd')
 
-For those vimsters out there, take a look at [figwheel-vim.md](./figwheel-vim.md) and [figwheel-spacemacs.md](./figwheel-spacemacs.md) to integrate with Bruce's invaluable [figwheel](https://github.com/bhauman/lein-figwheel)
+For those vimsters out there, take a look at [figwheel-vim.md](./figwheel-vim.md) and [figwheel-spacemacs.md](./figwheel-spacemacs.md) to integrate with Bruce's invaluable [figwheel](https://github.com/bhauman/lein-figwheel).
  
 ## Let's get figwheelin'
 
@@ -26,4 +26,4 @@ If you just want to quickly clone and run this project:
   * Click on **bravecards.core**
   * Congratulations - you're figwheelin'!
  
- I prefer to hook up my neovim editor to figwheel by following the instructions in [figwheel-vim.md](./figwheel-vim.md) 
+ I prefer to hook up my neovim editor to figwheel by following the instructions in [figwheel-vim.md](./figwheel-vim.md).
