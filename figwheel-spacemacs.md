@@ -1,3 +1,5 @@
+## Spacemacs figwheel cljs repl setup
+
 * Open a Clojure file to trigger clojure mode
 * Start Clojure REPL `SPC m s i`
 * Open up the CIDER REPL buffer with SPC b b - choose cider-repl. This is a CLJ/JVM one.
