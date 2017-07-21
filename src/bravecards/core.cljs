@@ -3,13 +3,14 @@
    #_[om.core :as om :include-macros true]
    [reagent.core :as reagent]
    [clojure.string :as string]
-   [sablono.core :as sab :include-macros true])
+   [sablono.core :as sab :include-macros true]
+   [cljs.test :as t :include-macros true :refer-macros [testing is]])
   (:require-macros
    [devcards.core :as dc :refer [defcard deftest]]))
 
 (enable-console-print!)
 
-(defcard intro"
+(defcard bravecards"
   # Bravecards: [devcards](https://github.com/bhauman/devcards) for [Clojure for the Brave and True](http://www.braveclojure.com/introduction)
 
   Using Bruce Hauman's great [devcards](https://github.com/bhauman/devcards) to work through Daniel Higginbotham's enjoyable book: [Clojure for the Brave and True](http://www.braveclojure.com/introduction).
@@ -58,7 +59,7 @@
   {:history false})
 
 (defn time-element
-  "Return a react element vector with most recent value of time-atom (deref)"
+  "Return a Hiccup elements vector with most recent value of time-atom (deref)"
   [time-atom]
   [:div "Time: " @time-atom])
 
@@ -72,12 +73,114 @@
   {:inspect-data false
    :history false})
 
+;; Uncomment to see reagent called directly
 #_(defcard reagent-atom-time
   "### reagent atom used to display time - updates every 10 secs"
   (fn [ratom-time _]
     (reagent/as-element [time-element ratom-time]))
   ratom-time
   {:history false})
+
+ (defcard chapters-1-2"
+  ### Chapters 1 & 2
+
+  These chapters cover environment setup and emacs - no code so on to Chapter 3!
+  ")
+
+;; =============================================================================
+;; CHAPTER-3: CONTROL FLOW
+;; =============================================================================
+
+(defn hammer-trident
+  "Is it a hammer or trident?"
+  [hammer?]
+  (if hammer?
+    "By Zeus's hammer!"
+    "By Aquaman's trident!"))
+
+(defn is-odin
+  "Is this odin?"
+  [odin?]
+  (if odin?
+    "By Odin's Elbow!"))
+
+(defn do-hammer-trident
+  "Is it a hammer or trident?"
+  [hammer?]
+  (if hammer?
+    (do (println "Successful hammer!")
+        "By Zeus's hammer!")
+    (do  (println "Failed trident!")
+    "By Aquaman's trident!")))
+
+(defn when-odin
+  "When this is odin, do it"
+  [odin?]
+  (when odin?
+    (println "Here's Odin!")
+    "By Odin's Elbow!"))
+
+(deftest chapter-3
+  "### Chapter 3: Control Flow
+
+  #### if-then-else, do and when
+
+  ```
+  (defn hammer-trident
+    \"Is it a hammer or trident?\"
+    [hammer?]
+    (if hammer?
+      \"By Zeus's hammer!\"
+      \"By Aquaman's trident!\"))
+
+  (defn is-odin
+    \"Is this odin?\"
+    [odin?]
+    (if odin?
+      \"By Odin's Elbow!\"))
+
+  (defn do-hammer-trident
+    \"Is it a hammer or trident?\"
+    [hammer?]
+    (if hammer?
+      (do (println \"Successful hammer!\")
+          \"By Zeus's hammer!\")
+      (do  (println \"Failed trident!\")
+      \"By Aquaman's trident!\")))
+
+  (defn when-odin
+    \"When this is odin, do it\"
+    [odin?]
+    (when odin?
+      (println \"Here's Odin!\")
+      \"By Odin's Elbow!\"))
+  ```
+  "
+  (testing "testing hammer-trident"
+    (is (= (hammer-trident true) "By Zeus's hammer!"))
+    (is (= (hammer-trident false) "By Aquaman's trident!")))
+  (testing "testing is-odin"
+    (is (= (is-odin true) "By Odin's Elbow!"))
+    (is (= (is-odin false) nil) "As there is no else form return nil"))
+  (testing "testing do-hammer-trident"
+    (is (= (do-hammer-trident true) "By Zeus's hammer!"))
+    (is (= (do-hammer-trident false) "By Aquaman's trident!")))
+  (testing "testing when-odin"
+    (is (= (when-odin true) "By Odin's Elbow!")))
+  (testing "testing nil?"
+    (is (= (nil? 1) false))
+    (is (= (nil? nil) true)))
+  (testing "testing nil-is-falsey"
+    (is (= (if nil
+            "never returned"
+            "nil is falsey") "nil is falsey")))
+  (testing "testing or"
+    (is (= (or false nil "first" "second") "first") "return first truthy")
+    (is (= (or false nil (= "yes" "no")) false) "return last value"))
+  (testing "testing and"
+    (is (= (and :correct :ok nil false true) nil) "return first falsey")
+    (is (= (and true :correct :ok "A+") "A+") "all true - return last value"))
+  )
 
 (defn main []
   ;; conditionally start the app based on whether the #main-app-area
