@@ -120,10 +120,16 @@
     (println "Here's Odin!")
     "By Odin's Elbow!"))
 
-(deftest chapter-3
-  "### Chapter 3: Control Flow
+(defn error-message
+  "Return error-message string based on severity-keyword"
+  [severity-keyword]
+  (str "OH GOD! IT'S A DISASTER! WE'RE "
+       (if (= severity-keyword :mild)
+         "MILDLY INCONVENIENCED!"
+         "DOOOOOOOMED!")))
 
-  #### if-then-else, do and when
+(deftest chapter-3-control-flow "
+  ### Chapter 3: Control Flow
 
   ```
   (defn hammer-trident
@@ -154,6 +160,14 @@
     (when odin?
       (println \"Here's Odin!\")
       \"By Odin's Elbow!\"))
+
+  (defn error-message
+   \"Return error-message string based on severity-keyword\"
+   [severity-keyword]
+   (str \"OH GOD! IT'S A DISASTER! WE'RE \"
+        (if (= severity-keyword :mild)
+          \"MILDLY INCONVENIENCED!\"
+          \"DOOOOOOOMED!\")))
   ```
   "
   (testing "testing hammer-trident"
@@ -180,7 +194,79 @@
   (testing "testing and"
     (is (= (and :correct :ok nil false true) nil) "return first falsey")
     (is (= (and true :correct :ok "A+") "A+") "all true - return last value"))
-  )
+  (testing "testing error-message"
+    (is (= (error-message :mild) "OH GOD! IT'S A DISASTER! WE'RE MILDLY INCONVENIENCED!"))
+    (is (= (error-message :bad) "OH GOD! IT'S A DISASTER! WE'RE DOOOOOOOMED!"))))
+
+(defonce churchill {:name {:first "Winston" :middle "Leonard" :last "Spencer-Churchill"}
+                    :born {:day 30 :month 11 :year 1874}})
+
+(deftest chapter-3-data-structures "
+  ### Chapter 3: Data Structures
+
+  #### Numbers
+
+  Clojurescript supports integers and floats but does not have a ratio type, e.g. 1/3, like Clojure.
+
+  #### Strings
+
+  Concat strings with the `str` function.
+
+  #### Maps
+
+  ```
+  {:x 1 :y 2 z: 3}
+  (defonce churchill {:name {:first \"Winston\" :middle \"Leonard\" :last \"Spencer-Churchill\"}
+                      :born {:day 30 :month 11 :year 1874}})
+  ```
+
+  #### Vectors, Lists and Sets
+
+  ```
+  [3 2 1]
+  '(1 2 3 4)
+  #{:x :y :z}
+  ```
+  "
+  (testing "testing cljs-has-no-ratios-like-clojure"
+    (is (= (/ 1 2) 0.5) "1 divided by 2 is 0.5")
+    (is (= (js/Math.floor (/ 200 3)) 66) "use js/Math.floor")
+    (is (= (js/Math.round (/ 200 3)) 67) "use js/Math.round"))
+  (testing "testing str-concat"
+    (is (= (str "1" "-2-" "3") "1-2-3")))
+  (testing "testing map-get"
+    (is (= (get {0 0 "a" 0 "b" 1 :c "text"} "b") 1) "any types can be used as key/value's")
+    (is (= (get {:a 0 :b 1} :b) 1) "typically use keywords for keys")
+    (is (= (get {:a 0 :b 1} :c) nil) "return nil if key not found")
+    (is (= (get {:a 0 :b 1} :c 3) 3) "return default value if key not found"))
+  (testing "testing map-get-in"
+    (is (= (get-in churchill [:born :year]) 1874)))
+  (testing "testing map-get-by-key"
+    (is (= ({:name "Human Coffeepot"} :name) "Human Coffeepot")))
+  (testing "testing keyword-in-map"
+    (is (= (:name {:name "Human Coffeepot"}) "Human Coffeepot")))
+  (testing "testing keyword-in-map-with default"
+    (is (= (:pot {:name "Human Coffeepot"} "defaultPot" ) "defaultPot")))
+  (testing "testing vector-get"
+    (is (= (get [3 2 1] 0) 3)))
+  (testing "testing vector-conj"
+    (is (= (conj [1 2 3] 4) [1 2 3 4]) "conj adds to end of vector"))
+  (testing "testing list-nth"
+    (is (= (nth '(:a :b :c) 0) :a)))
+  (testing "testing list-conj"
+    (is (= (conj '(:b :c :d) :a) '(:a :b :c :d)) "conj adds to start of list"))
+  (testing "testing hash-set-conj"
+    (is (= (conj #{:b :c :d} :a) #{:a :b :c :d}))
+    (is (= (conj #{:b :c :d} :b) #{:b :c :d})))
+  (testing "testing hash-set-contains"
+    (is (= (contains? #{:b :c :d} :a) false))
+    (is (= (contains? #{:b :c :d} :b) true)))
+  (testing "testing hash-set-get"
+    (is (= (get #{:b :c :d} :b) :b))
+    (is (= (get #{:b :c :d} :a) nil)))
+  (testing "testing keyword-in-hash-set"
+    (is (= (:b #{:b :c :d}) :b))
+    (is (= (:a #{:b :c :d}) nil))))
 
 (defn main []
   ;; conditionally start the app based on whether the #main-app-area
