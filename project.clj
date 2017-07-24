@@ -35,7 +35,7 @@
                                    ;; started and complied your application.
                                    ;; Comment this out once it no longer serves you.
                                    :open-urls ["http://localhost:3449/cards.html"]}
-                        :compiler { :main       "bravecards.core"
+                        :compiler { :main       "bravecards.about"
                                     :asset-path "js/compiled/devcards_out"
                                     :output-to  "resources/public/js/compiled/bravecards_devcards.js"
                                     :output-dir "resources/public/js/compiled/devcards_out"
@@ -43,14 +43,14 @@
                        {:id "dev"
                         :source-paths ["src"]
                         :figwheel true
-                        :compiler {:main       "bravecards.core"
+                        :compiler {:main       "bravecards.about"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/bravecards.js"
                                    :output-dir "resources/public/js/compiled/out"
                                    :source-map-timestamp true }}
                        {:id "prod"
                         :source-paths ["src"]
-                        :compiler {:main       "bravecards.core"
+                        :compiler {:main       "bravecards.about"
                                    :asset-path "js/compiled/out"
                                    :output-to  "resources/public/js/compiled/bravecards.js"
                                    :optimizations :advanced}}]}
