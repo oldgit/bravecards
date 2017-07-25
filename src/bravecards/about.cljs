@@ -29,16 +29,14 @@
 
   For those vimsters out there, take a look at `figwheel-vim.md` and `figwheel-spacemacs.md` to integrate with Bruce's
   invaluable [figwheel](https://github.com/bhauman/lein-figwheel)
-  ")
 
- (defcard chapters"
   ### Chapters 1 & 2
 
   These chapters cover environment setup and emacs - no code so on to Chapter 3!
 
   ### Chapter 3
 
-  Control flow and data structures is [here](#!/bravecards.chapter_3).
+  [Control flow, data structures and functions](#!/bravecards.chapter_3).
 
   ")
 
