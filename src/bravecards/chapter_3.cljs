@@ -10,10 +10,6 @@
 
 (enable-console-print!)
 
-;; =============================================================================
-;; CHAPTER-3: CONTROL FLOW + DATA STRUCTURES
-;; =============================================================================
-
 (defn hammer-trident
   "Is it a hammer or trident?"
   [hammer?]
@@ -206,7 +202,7 @@
 (defn favourite-things
   [name & things]
   (str "Hi, " name ", here are my favourite things: "
-       (clojure.string/join ", " things)))
+       (string/join ", " things)))
 
 ;; Return the first element of a collection
 (defn my-first
@@ -283,7 +279,7 @@
   (defn favourite-things
     [name & things]
     (str \"Hi, \" name \", here are my favourite things: \"
-       (clojure.string/join \", \" things)))
+       (string/join \", \" things)))
   ```
 
   #### Destructuring
@@ -412,7 +408,7 @@
 
 (defn matching-part
   [part]
-  {:name (clojure.string/replace (:name part) #"^left-" "right-")
+  {:name (string/replace (:name part) #"^left-" "right-")
    :size (:size part)})
 
 (defn symmetrize-body-parts
@@ -428,3 +424,13 @@
                      (set [part (matching-part part)])))))))
 
 (symmetrize-body-parts asym-hobbit-body-parts)
+
+(defn better-symmetrize-body-parts
+  "Expects a seq of maps that have a :name and :size"
+  [asym-body-parts]
+  (reduce (fn [final-body-parts part]
+            (into final-body-parts (set [part (matching-part part)])))
+          []
+          asym-body-parts))
+
+(better-symmetrize-body-parts asym-hobbit-body-parts)
